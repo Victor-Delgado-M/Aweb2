@@ -1,14 +1,13 @@
 import { cevicherias  } from './arreglo'
-import './style.css'
-// import typescriptLogo from './typescript.svg'
-// import { setupCounter } from './counter'
-
-// import {  bulbasaur } from './bases/02-objects'
-
-// Definición de tipo para los elementos del arreglo
+import './style.css'}
+// creando interfaz del arreglo cevicheria 
 interface Cevicheria {
+  id: Number;
   nombre: string;
   direccion: string;
+  ruc: string;
+  slogan: string;
+  horario: string;
 }
 
 console.log("*RESULTADO DEL FOREACH* \n");
