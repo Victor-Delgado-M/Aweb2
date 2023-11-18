@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+
+
+
+  model Cevicheria {
+    id        Int    @id @default(autoincrement())
+    nombre  String  @unique
+    direccion String 
+    ruc String 
+    slogan String 
+    horario String 
+    platos Plato[]
+    empleados Empleado[]
+  }
+
+  model Empleado {
+    id        Int    @id @default(autoincrement())
+    nombre  String  
+    cedula String @unique
+    telefono String 
+    experiencia String 
+    cevicheria    Cevicheria    @relation(fields: [cevicheriaId], references: [id])
+    cevicheriaId  Int
+  }
+
+
+  model Cliente {
+    id        Int    @id @default(autoincrement())
+    cedula    String  @unique
+    nombre  String
+    telefono String 
+    correo String
+    pedidos Pedido[]
+  }
+
+  model Plato {
+    id        Int    @id @default(autoincrement())
+    nombre  String  @unique
+    precio String 
+    cevicheria    Cevicheria    @relation(fields: [cevicheriaId], references: [id])
+    cevicheriaId  Int
+    pedidos Pedido[]
+  }
+
+  model Pedido {
+    id    Int     @id @default(autoincrement())
+    detallesorden String  
+    fecha  String
+    hora  String
+    observacion  String?
+    cliente    Cliente    @relation(fields: [clienteId], references: [id])
+    clienteId  Int
+    plato    Plato    @relation(fields: [platoId], references: [id])
+    platoId  Int
+  }
+
+
+model Employee {
+  id        Int     @id @default(autoincrement())
+  code String  @unique
+  name      String
+  address      String?
+  phone      String?
+  transactions Transaction[]
+}
+
+
+
+
